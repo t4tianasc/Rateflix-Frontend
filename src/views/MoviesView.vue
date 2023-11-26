@@ -21,6 +21,7 @@
 <script>
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+import { getAPI } from '../axios-api'
 
 export default {
   name: 'App',
@@ -37,7 +38,6 @@ export default {
       allFilms: [],
     };
   },
-  
   methods: {
     fetchLatestReleases() {
       
@@ -46,7 +46,13 @@ export default {
       
     },
     fetchAllFilms() {
-      
+      getAPI.get('/movies/movies',)
+        .then(response => {
+          this.allFilms = response.data
+        })
+        .catch(err => {
+          console.log(err);
+        })
     },
   },
   mounted() {
