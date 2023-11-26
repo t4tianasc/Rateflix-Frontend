@@ -1,50 +1,27 @@
 <template>
-  <carousel :items-to-show="7">
-    <slide v-for="movie in allFilms" :key="movie.id">
-      <div style="">
-        <div>
-          <img style="width: 200px;" :src="movie.thumbnail" alt="movie.genre" />
-          <div style="display:block; width: 45px;">
-            <p class="title-movie">{{ movie.title }}</p>
-          </div>
+  <div class="grid-container">
+    <div v-for="movie in allFilms" :key="movie.id" class="grid-item">
+      <div>
+        <img style="width: 200px;" :src="movie.thumbnail" alt="movie.genre" />
+        <div style="display:block; width: 45px;">
+          <p class="title-movie">{{ movie.title }}</p>
         </div>
       </div>
-    </slide>
-
-    <template #addons>
-      <navigation />
-      <pagination />
-    </template>
-  </carousel>
+    </div>
+  </div>
 </template>
 
 <script>
-import 'vue3-carousel/dist/carousel.css'
-import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import { getAPI } from '../axios-api'
 
 export default {
-  name: 'App',
-  components: {
-    Carousel,
-    Slide,
-    Pagination,
-    Navigation,
-  },
+  name: "MoviesView",
   data() {
     return {
-      latestReleases: [],
-      userRatedMovies: [],
       allFilms: [],
     };
   },
   methods: {
-    fetchLatestReleases() {
-      
-    },
-    fetchUserRatedMovies() {
-      
-    },
     fetchAllFilms() {
       getAPI.get('/movies/movies',)
         .then(response => {
@@ -56,14 +33,28 @@ export default {
     },
   },
   mounted() {
-    this.fetchLatestReleases();
-    this.fetchUserRatedMovies();
     this.fetchAllFilms();
   },
-}
+};
 </script>
 
 <style scoped>
+.grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.grid-item {
+  flex: 0 0 calc(20% - 10px);
+  margin: 30px;
+  background-color: #ebeaea;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 10px;
+}
 .title-movie {
   text-overflow: ellipsis;
   width: 200px;
