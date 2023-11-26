@@ -6,12 +6,10 @@
 
   <carousel :autoplay="2000" :transition="500" :items-to-show="7">
     <slide v-for="movie in latestReleases" :key="movie.id">
-      <div style="">
-        <div>
-          <img style="width: 200px;" :src="movie.thumbnail" alt="movie.genre" />
-          <div style="display:block; width: 45px;">
-            <p class="title-movie">{{ movie.title }}</p>
-          </div>
+      <div>
+        <img style="width: 200px;" :src="movie.thumbnail" alt="movie.genre" />
+        <div style="display:block; width: 45px;">
+          <p class="title-movie">{{ movie.title }}</p>
         </div>
       </div>
     </slide>
