@@ -1,12 +1,14 @@
 <template>
-  <div class="about">
-    <h1>This is the movies view</h1>
-  </div>
-</template>
- <template>
-  <carousel :items-to-show="5">
-    <slide v-for="movie in latestReleases" :key="movie">
-      {{ movie }}
+  <carousel :items-to-show="7">
+    <slide v-for="movie in allFilms" :key="movie.id">
+      <div style="">
+        <div>
+          <img style="width: 200px;" :src="movie.thumbnail" alt="movie.genre" />
+          <div style="display:block; width: 45px;">
+            <p class="title-movie">{{ movie.title }}</p>
+          </div>
+        </div>
+      </div>
     </slide>
 
     <template #addons>
@@ -30,7 +32,7 @@ export default {
   },
   data() {
     return {
-      latestReleases: ['movie1', 'movie2'],
+      latestReleases: [],
       userRatedMovies: [],
       allFilms: [],
     };
@@ -54,3 +56,15 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.title-movie {
+  text-overflow: ellipsis;
+  width: 200px;
+  height: 45px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+</style>
